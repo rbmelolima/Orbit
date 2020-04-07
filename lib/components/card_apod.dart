@@ -64,6 +64,7 @@ class _CardApodState extends State<CardApod> {
               height: 1.6,
             ),
           ),
+          
         ],
       ),
     );

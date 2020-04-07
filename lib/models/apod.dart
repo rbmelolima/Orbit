@@ -7,7 +7,7 @@ class Apod {
   final String url;
   final String mediaType;
 
-  Apod(
+  Apod({
     this.copyright,
     this.date,
     this.explanation,
@@ -15,16 +15,19 @@ class Apod {
     this.title,
     this.url,
     this.mediaType,
-  );
+  });
 
-  Apod.fromJson(Map<String, dynamic> json)
-      : copyright = json['copyright'],
-        date = json['date'],
-        explanation = json['explanation'],
-        hdurl = json['hdurl'],
-        title = json['title'],
-        url = json['url'],
-        mediaType = json['media_type'];
+  factory Apod.fromJson(Map<String, dynamic> json) {
+    return Apod(
+      copyright: json['copyright'],
+      date: json['date'],
+      explanation: json['explanation'],
+      hdurl: json['hdurl'],
+      title: json['title'],
+      url: json['url'],
+      mediaType: json['media_type'],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'copyright': copyright,
@@ -36,3 +39,4 @@ class Apod {
         'media_type': mediaType
       };
 }
+

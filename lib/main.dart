@@ -1,9 +1,13 @@
-import 'package:apod/screens/index.dart';
+import 'package:apod/screens/apod.dart';
+import 'package:apod/screens/favorites.dart';
+import 'package:apod/screens/wallpapers.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      MyApp(),
-    );
+void main() {
+  runApp(
+    MyApp(),
+  );
+}
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
@@ -13,16 +17,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
-  final List<Widget> _children = [Index(), Index(), Index()];
+  final List<Widget> _children = [Wallpaper(), Favorites(), POTD()];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Orbit',
+      title: 'Orbit - Wallpapers',
       theme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Orbit'),
+          title: Text('Orbit - Wallpapers'),
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(

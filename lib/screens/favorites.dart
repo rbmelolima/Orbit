@@ -5,12 +5,12 @@ import 'package:apod/http/apod.dart';
 import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
 
-class Index extends StatefulWidget {
+class Favorites extends StatefulWidget {
   @override
-  _IndexState createState() => _IndexState();
+  _FavoritesState createState() => _FavoritesState();
 }
 
-class _IndexState extends State<Index> {
+class _FavoritesState extends State<Favorites> {
   Future<Apod> apod;
   DateTime dateTime;
 
@@ -37,7 +37,7 @@ class _IndexState extends State<Index> {
           case ConnectionState.done:
             String copyright = snapshot.data.copyright == null
                 ? 'Sem copyright'
-                : 'Créditos: ' + snapshot.data.copyright;            
+                : 'Créditos: ' + snapshot.data.copyright;
 
             return ListView(
               children: <Widget>[
