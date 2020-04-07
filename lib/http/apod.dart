@@ -40,14 +40,14 @@ Future<Apod> searchImage(DateTime date) async {
 
 Future<List<Apod>> searchWallpaper() async {
   final response = await client.get(
-    'https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=50',
+    'https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=30',
   );
 
   if (response.statusCode == 200) {
     return compute(parseApod, response.body);
     //Pesquisar depois sobre a função compute
   } else
-    throw Exception('Falha ao buscar na API!');
+    throw Exception('Falha ao buscar na API!' + response.statusCode.toString());
 }
 
 List<Apod> parseApod(String responseBody) {

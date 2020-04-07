@@ -65,7 +65,7 @@ class _POTDState extends State<POTD> {
                   title: snapshot.data.title,
                   explanation: snapshot.data.explanation,
                   hdurl: snapshot.data.hdurl,
-                  date: dateTime,
+                  date: snapshot.data.date,
                   mediaType: snapshot.data.mediaType,
                 ),
                 Padding(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CardApod extends StatefulWidget {
   final String copyright;
-  final DateTime date;
+  final String date;
   final String explanation;
   final String hdurl;
   final String title;
@@ -39,7 +39,7 @@ class _CardApodState extends State<CardApod> {
           Container(
             margin: const EdgeInsets.only(bottom: 16, top: 5),
             child: Text(
-              widget.copyright,
+              widget.copyright != null ? widget.copyright : 'No copyright',
               style: TextStyle(
                 fontSize: 10.0,
                 fontStyle: FontStyle.italic,
@@ -49,7 +49,7 @@ class _CardApodState extends State<CardApod> {
           Container(
             margin: const EdgeInsets.only(bottom: 16.0),
             child: Text(
-              widget.title,
+              widget.title != null ? widget.title : 'No title',
               style: TextStyle(
                 fontSize: heightText + 10,
                 fontWeight: FontWeight.bold,
@@ -57,14 +57,13 @@ class _CardApodState extends State<CardApod> {
             ),
           ),
           Text(
-            widget.explanation,
+            widget.explanation != null ? widget.explanation : 'No explanation',
             style: TextStyle(
               fontSize: heightText,
               letterSpacing: 0.5,
               height: 1.6,
             ),
           ),
-          
         ],
       ),
     );
