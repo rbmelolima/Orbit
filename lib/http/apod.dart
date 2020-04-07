@@ -13,6 +13,10 @@ Client client = HttpClientWithInterceptor.build(
 );
 
 Future<Apod> searchImage(DateTime date) async {
+  /*
+    Salvar no banco de dados a imagem do dia e responder ao cliente os dados da API
+  */
+
   var formatter = new DateFormat('yyyy-MM-dd');
 
   String formattedDate =
@@ -21,15 +25,22 @@ Future<Apod> searchImage(DateTime date) async {
   final response = await client.get(
       'https://api.nasa.gov/planetary/apod?api_key=$apiKey&date=$formattedDate');
 
-  if (response.statusCode == 200)
-    return Apod.fromJson(json.decode(response.body));
-  else
-    throw Exception('Falha ao buscar na API!');
+  switch (response.statusCode) {
+    case 200:
+      return Apod.fromJson(json.decode(response.body));
+    case 500:
+      return null;
+      break;
+
+    default:
+      throw Exception('Falha ao buscar na API!');
+      break;
+  }
 }
 
 Future<List<Apod>> searchWallpaper() async {
   final response = await client.get(
-    'https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=15',
+    'https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=50',
   );
 
   if (response.statusCode == 200) {

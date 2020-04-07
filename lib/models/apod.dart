@@ -36,7 +36,6 @@ class Apod {
         'hdurl': hdurl,
         'title': title,
         'url': url,
-        'media_type': mediaType
+        'media_type': mediaType,
       };
 }
-

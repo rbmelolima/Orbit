@@ -21,12 +21,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Orbit - Wallpapers',
       theme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Orbit - Wallpapers'),
+          title: Text('Orbit - Universe wallpapers'),
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(

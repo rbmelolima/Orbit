@@ -24,6 +24,8 @@ dependencies:
   url_launcher: 
   intl:
   video_player:
+  sqflite:
+  path:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -48,15 +50,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - images/redirect.jpg
-   - images/earth.jpg
-   - images/jupiter.jpg
-   - images/mars.jpg
-   - images/mercury.jpg
-   - images/neptune.jpg
-   - images/saturn.png
-   - images/uranus.jpg
-   - images/venus.jpg
-   - images/foto1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

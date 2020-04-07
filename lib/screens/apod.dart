@@ -11,6 +11,16 @@ class POTD extends StatefulWidget {
   _POTDState createState() => _POTDState();
 }
 
+/*
+                    Responsabilidade da tela apod.dart
+
+    1. Ir até o BDD e verificar a data da última foto
+    2. Comparar a última data do banco de dados com a data atual do sistema
+      2.1 Se a diferença for de 6 horas, executar o searchImage do http
+      2.2 Se a diferença for menos 6 horas, executar o searchImagePOTD do banco de dados
+            
+*/
+
 class _POTDState extends State<POTD> {
   Future<Apod> apod;
   DateTime dateTime;
@@ -27,6 +37,13 @@ class _POTDState extends State<POTD> {
     return FutureBuilder<Apod>(
       future: apod,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return CenteredMessage(
+            'Erro: ' + snapshot.hasData.toString(),
+            icon: Icons.error_outline,
+          );
+        }
+
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             break;
@@ -74,6 +91,7 @@ class _POTDState extends State<POTD> {
             );
             break;
         }
+
         return CenteredMessage(
           'Nada foi encontrado!',
           icon: Icons.error_outline,
