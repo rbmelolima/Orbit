@@ -30,11 +30,9 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
-    String copyright =
-        widget.copyright == null ? 'No copyright' : widget.copyright;
+    String copyright = widget.copyright == null ? 'No copyright' : widget.copyright;
     String title = widget.title == null ? 'No title' : widget.title;
-    String explanation =
-        widget.explanation == null ? 'No explanation' : widget.explanation;
+    String explanation = widget.explanation == null ? 'No explanation' : widget.explanation;
 
     return ListView(
       padding: const EdgeInsets.all(16.0),

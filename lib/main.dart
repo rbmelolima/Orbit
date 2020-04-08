@@ -17,10 +17,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
-  final List<Widget> _children = [Wallpaper(), Favorites(), POTD()];
+  final List<Widget> _children = [Wallpaper(), Favorites(), APOD()];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {   
 
     return MaterialApp(
       title: 'Orbit - Wallpapers',

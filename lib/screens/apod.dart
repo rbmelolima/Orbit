@@ -5,23 +5,13 @@ import 'package:apod/http/apod.dart';
 import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
 
-//Picture of the day (POTD)
-class POTD extends StatefulWidget {
+//Picture of the day (APOD)
+class APOD extends StatefulWidget {
   @override
   _POTDState createState() => _POTDState();
 }
 
-/*
-                    Responsabilidade da tela apod.dart
-
-    1. Ir até o BDD e verificar a data da última foto
-    2. Comparar a última data do banco de dados com a data atual do sistema
-      2.1 Se a diferença for de 6 horas, executar o searchImage do http
-      2.2 Se a diferença for menos 6 horas, executar o searchImagePOTD do banco de dados
-            
-*/
-
-class _POTDState extends State<POTD> {
+class _POTDState extends State<APOD> {
   Future<Apod> apod;
   DateTime dateTime;
 
@@ -33,7 +23,7 @@ class _POTDState extends State<POTD> {
   @override
   Widget build(BuildContext context) {
     apod = searchImage(dateTime);
-
+        
     return FutureBuilder<Apod>(
       future: apod,
       builder: (context, snapshot) {

@@ -1,7 +1,7 @@
 import 'package:apod/components/centered_message.dart';
 import 'package:apod/components/circular_progress.dart';
 import 'package:apod/components/details_photo.dart';
-import 'package:apod/http/apod.dart';
+import 'package:apod/http/wallpaper.dart';
 import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +44,6 @@ class Wallpaper extends StatelessWidget {
 
 class PhotosGrid extends StatelessWidget {
   final List<Apod> photos;
-
   const PhotosGrid({Key key, this.photos}) : super(key: key);
 
   @override
@@ -58,41 +57,54 @@ class PhotosGrid extends StatelessWidget {
       ),
       itemCount: photos.length,
       itemBuilder: (context, index) {
-        if (photos[index].mediaType == 'image' && photos[index].url != null ||
-            photos[index].url != '') {
-          return InkWell(
-            child: Image.network(
-              photos[index].url,
-              fit: BoxFit.cover,
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return MaterialApp(
-                    title: 'Orbit - Wallpapers',
-                    theme: ThemeData.dark(),
-                    home: Scaffold(
-                      appBar: AppBar(
-                        title: Text('Detalhes da foto'),
-                      ),
-                      body: Details(
-                        copyright: photos[index].copyright,
-                        explanation: photos[index].explanation,
-                        hdurl: photos[index].hdurl,
-                        mediaType: photos[index].mediaType,
-                        title: photos[index].title,
-                        url: photos[index].url,
-                        date: photos[index].date,
-                      ),
-                    ),
-                  );
-                }),
-              );
-            },
+        if (photos[index].mediaType == 'image') {
+          return ImageColumn(
+            photos: photos,
+            index: index,
           );
         } else
           return null;
+      },
+    );
+  }
+}
+
+class ImageColumn extends StatelessWidget {
+  final List<Apod> photos;
+  final int index;
+  const ImageColumn({Key key, this.photos, this.index}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Image.network(
+        photos[index].url,
+        fit: BoxFit.cover,
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return MaterialApp(
+              title: 'Orbit - Wallpapers',
+              theme: ThemeData.dark(),
+              home: Scaffold(
+                appBar: AppBar(
+                  title: Text('Detalhes da foto'),
+                ),
+                body: Details(
+                  copyright: photos[index].copyright,
+                  explanation: photos[index].explanation,
+                  hdurl: photos[index].hdurl,
+                  mediaType: photos[index].mediaType,
+                  title: photos[index].title,
+                  url: photos[index].url,
+                  date: photos[index].date,
+                ),
+              ),
+            );
+          }),
+        );
       },
     );
   }

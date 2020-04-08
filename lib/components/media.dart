@@ -18,7 +18,10 @@ class _MediaAPIState extends State<MediaAPI> {
     switch (widget.mediaType) {
       case 'image':
         return InkWell(
-          child: Image.network(widget.url),
+          child: Image.network(
+            widget.url,
+            fit: BoxFit.cover,
+          ),
           onTap: () {
             launch(widget.hdurl);
           },
@@ -26,7 +29,10 @@ class _MediaAPIState extends State<MediaAPI> {
 
       case 'video':
         return InkWell(
-          child: Image.asset('images/redirect.jpg'),
+          child: Image.asset(
+            'images/redirect.jpg',
+            fit: BoxFit.cover,
+          ),
           onTap: () {
             launch(widget.url);
           },
