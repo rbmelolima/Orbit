@@ -1,13 +1,22 @@
 import 'package:apod/database/dao/apod.dart';
+import 'package:apod/database/dao/favorite.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
 
 Future<Database> getDatabase() async {
   final String path = join(await (getDatabasesPath()), 'orbit.db');
   return openDatabase(path, onCreate: (db, version) {
     db.execute(APODdao.tablePOTD);
+    db.execute(FavoritesDao.tableFavorites);
   }, version: 1);
+}
+
+Future<int> truncate(String nameTable) async {
+  print('// Apagando todas as informações da tabela: $nameTable //');
+  final Database db = await getDatabase();
+  return db.delete(
+    nameTable,
+  );
 }
 
 const String nameTablePOTD = 'photoOfTheDay';

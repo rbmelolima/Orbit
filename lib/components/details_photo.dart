@@ -1,3 +1,4 @@
+import 'package:apod/components/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 import 'media.dart';
@@ -30,9 +31,11 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
-    String copyright = widget.copyright == null ? 'No copyright' : widget.copyright;
-    String title = widget.title == null ? 'No title' : widget.title;
-    String explanation = widget.explanation == null ? 'No explanation' : widget.explanation;
+    String copyright =
+        widget.copyright == null ? 'Autor desconhecido' : widget.copyright;
+    String title = widget.title == null ? 'Sem título' : widget.title;
+    String explanation =
+        widget.explanation == null ? 'Sem descrição' : widget.explanation;
 
     return ListView(
       padding: const EdgeInsets.all(16.0),
@@ -71,7 +74,13 @@ class _DetailsState extends State<Details> {
                     ),
                   ),
                   Expanded(
-                    child: FavoriteButton(),
+                    child: FavoriteButton(
+                      colorIcon: Colors.grey,
+                      statusFavorite: false,
+                      onclick: (){
+                        
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -97,21 +106,6 @@ class _DetailsState extends State<Details> {
           ],
         )
       ],
-    );
-  }
-}
-
-class FavoriteButton extends StatelessWidget {
-  const FavoriteButton({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.favorite),
-      color: Colors.red,
-      onPressed: () {},
     );
   }
 }

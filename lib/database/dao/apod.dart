@@ -3,8 +3,6 @@ import 'package:apod/models/apod.dart';
 import 'package:sqflite/sqflite.dart';
 import 'converse.dart';
 
-//POTD Significa "Picture of the day"
-
 class APODdao {
   static const String tablePOTD = 'CREATE TABLE $nameTablePOTD('
       '$id          INTEGER PRIMARY KEY, '
@@ -30,15 +28,7 @@ class APODdao {
     String sqlQuery = 'SELECT * FROM $nameTablePOTD LIMIT 1';
     final List<Map<String, dynamic>> rows = await db.rawQuery(sqlQuery);
     return (toList(rows));
-  }
-
-  Future<int> truncate(String nameTable) async {
-    print('// Apagando todas as informações da tabela: $nameTable //');
-    final Database db = await getDatabase();
-    return db.delete(
-      nameTable,
-    );
-  }
+  }  
 
   Future<String> getDate() async {
     print('// Procurando a data da foto do dia //');
@@ -56,7 +46,7 @@ class APODdao {
     if (data == null) {
       return '';
     } else {
-      formattedData = "$data 00:00:00";
+      formattedData = "$data 03:00:00";
       return formattedData;
     }
   }

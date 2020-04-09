@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: onTabTapped,
+          type: BottomNavigationBarType.shifting,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.collections),

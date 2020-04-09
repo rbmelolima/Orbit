@@ -1,5 +1,8 @@
 import 'package:apod/components/media.dart';
+import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
+
+import 'favorite_button.dart';
 
 class CardApod extends StatefulWidget {
   final String copyright;
@@ -38,18 +41,48 @@ class _CardApodState extends State<CardApod> {
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 16, top: 5),
-            child: Text(
-              widget.copyright != null ? widget.copyright : 'No copyright',
-              style: TextStyle(
-                fontSize: 10.0,
-                fontStyle: FontStyle.italic,
-              ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          widget.copyright != null
+                              ? widget.copyright
+                              : 'Autor desconhecido',
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        widget.date,
+                        style: TextStyle(
+                          fontSize: 10.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: FavoriteButton(
+                    colorIcon: Colors.grey,
+                    statusFavorite: false,
+                    onclick: () {
+                     
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 16.0),
             child: Text(
-              widget.title != null ? widget.title : 'No title',
+              widget.title != null ? widget.title : 'Sem título',
               style: TextStyle(
                 fontSize: heightText + 10,
                 fontWeight: FontWeight.bold,
@@ -57,7 +90,7 @@ class _CardApodState extends State<CardApod> {
             ),
           ),
           Text(
-            widget.explanation != null ? widget.explanation : 'No explanation',
+            widget.explanation != null ? widget.explanation : 'Sem descrição',
             style: TextStyle(
               fontSize: heightText,
               letterSpacing: 0.5,

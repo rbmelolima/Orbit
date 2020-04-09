@@ -23,7 +23,7 @@ class _POTDState extends State<APOD> {
   @override
   Widget build(BuildContext context) {
     apod = searchImage(dateTime);
-        
+
     return FutureBuilder<Apod>(
       future: apod,
       builder: (context, snapshot) {
@@ -60,21 +60,26 @@ class _POTDState extends State<APOD> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1995),
-                        lastDate: DateTime.now(),
-                      ).then((date) {
-                        setState(() {
-                          dateTime = date;
-                          print(date);
-                        });
-                      });
-                    },
-                    child: Text('Veja mais fotos!'),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      RaisedButton(
+                        onPressed: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1995),
+                            lastDate: DateTime.now(),
+                          ).then((date) {
+                            setState(() {
+                              dateTime = date;
+                              print(date);
+                            });
+                          });
+                        },
+                        child: Text('Veja mais fotos!'),
+                      ),
+                    ],
                   ),
                 ),
               ],

@@ -59,7 +59,7 @@ Future<Apod> cache(Response response, DateTime searchDate) async {
     if (diff >= 1) {
       print(
           'A diferença da foto do banco e a data atual ($dataAtual) é maior que um dia!');
-      fotoDia.truncate(nameTablePOTD);
+      truncate(nameTablePOTD);
       return Apod.fromJson(json.decode(response.body));
     } else {
       print(
