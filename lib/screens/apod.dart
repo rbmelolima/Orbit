@@ -22,7 +22,7 @@ class _POTDState extends State<APOD> {
 
   @override
   Widget build(BuildContext context) {
-    apod = searchImage(dateTime);
+    apod = imageCacheAPOD(dateTime);
 
     return FutureBuilder<Apod>(
       future: apod,
@@ -47,16 +47,20 @@ class _POTDState extends State<APOD> {
                 ? 'Sem copyright'
                 : 'Créditos: ' + snapshot.data.copyright;
 
+            Apod photoDay = Apod(
+              url: snapshot.data.url,
+              copyright: copyright,
+              title: snapshot.data.title,
+              explanation: snapshot.data.explanation,
+              hdurl: snapshot.data.hdurl,
+              date: snapshot.data.date,
+              mediaType: snapshot.data.mediaType,
+            );
+
             return ListView(
               children: <Widget>[
                 CardApod(
-                  url: snapshot.data.url,
-                  copyright: copyright,
-                  title: snapshot.data.title,
-                  explanation: snapshot.data.explanation,
-                  hdurl: snapshot.data.hdurl,
-                  date: snapshot.data.date,
-                  mediaType: snapshot.data.mediaType,
+                  apod: photoDay,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),

@@ -15,8 +15,6 @@ Client client = HttpClientWithInterceptor.build(
 );
 
 Future<Apod> searchImage(DateTime date) async {
-  DateTime searchDate = date;
-
   String formattedDate =
       date == null ? formatter.format(DateTime.now()) : formatter.format(date);
 
@@ -25,7 +23,7 @@ Future<Apod> searchImage(DateTime date) async {
 
   switch (response.statusCode) {
     case 200:
-      return cache(response, searchDate);
+      return Apod.fromJson(json.decode(response.body));
 
     default:
       throw Exception('Falha ao buscar na API!');
@@ -33,48 +31,52 @@ Future<Apod> searchImage(DateTime date) async {
   }
 }
 
-Future<Apod> cache(Response response, DateTime searchDate) async {
+Future<Apod> imageCacheAPOD(DateTime searchDate) async {
   if (searchDate != null &&
       formatter.format(searchDate) != formatter.format(DateTime.now())) {
     print('Mostrando foto do dia $searchDate');
-    return Apod.fromJson(json.decode(response.body));
+    return searchImage(searchDate);
   }
 
   final APODdao fotoDia = APODdao();
   DateTime dataAtual = DateTime.now();
   String dataFoto = await fotoDia.getDate();
 
-  if (dataFoto == '') {
-    print(
-        'Não há nada no banco de dados, vou retornar os dados da API e salvar no bdd a foto do dia');
-    Apod apod = Apod.fromJson(json.decode(response.body));
-    fotoDia.save(apod);
-    return apod;
-  } else {
-    print('Encontrei algo no banco relacionado à foto do dia');
-    DateTime parsedData = DateTime.parse(dataFoto);
-    Duration difference = dataAtual.difference(parsedData);
-    int diff = difference.inDays;
+  switch (dataFoto) {
+    case '':
+      print(
+          'Não há nada no banco de dados, vou retornar os dados da API e salvar no bdd a foto do dia');
+      Apod apod = await searchImage(searchDate);
+      if (apod != null) fotoDia.save(apod);
+      return apod;
 
-    if (diff >= 1) {
-      print(
-          'A diferença da foto do banco e a data atual ($dataAtual) é maior que um dia!');
-      truncate(nameTablePOTD);
-      return Apod.fromJson(json.decode(response.body));
-    } else {
-      print(
-          'A diferença das datas é menor que um dia! Vou servir o que está no banco :)');
-      List<Apod> listApod = await fotoDia.search();
-      Apod returnApod = Apod(
-        copyright: listApod[0].copyright,
-        date: listApod[0].date,
-        explanation: listApod[0].explanation,
-        hdurl: listApod[0].hdurl,
-        mediaType: listApod[0].mediaType,
-        title: listApod[0].title,
-        url: listApod[0].url,
-      );
-      return returnApod;
-    }
+    default:
+      print('Encontrei algo no banco relacionado à foto do dia');
+      DateTime parsedData = DateTime.parse(dataFoto);
+      Duration difference = dataAtual.difference(parsedData);
+      int diff = difference.inDays;
+
+      if (diff >= 1) {
+        print(
+            'A diferença da foto do banco e a data atual ($dataAtual) é maior que um dia!');
+        truncate(nameTablePOTD);
+        fotoDia.save(await searchImage(searchDate));
+        return searchImage(searchDate);
+      } else {
+        print(
+            'A diferença das datas é menor que um dia! Vou servir o que está no banco :)');
+        List<Apod> listApod = await fotoDia.search();
+        Apod returnApod = Apod(
+          copyright: listApod[0].copyright,
+          date: listApod[0].date,
+          explanation: listApod[0].explanation,
+          hdurl: listApod[0].hdurl,
+          mediaType: listApod[0].mediaType,
+          title: listApod[0].title,
+          url: listApod[0].url,
+        );
+        return returnApod;
+      }
+      break;
   }
 }
