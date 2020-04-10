@@ -13,7 +13,7 @@ Client client = HttpClientWithInterceptor.build(
 
 Future<List<Apod>> searchWallpaper() async {
   final response = await client.get(
-    'https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=30',
+    'https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=20',
   );
 
   if (response.statusCode == 200) {

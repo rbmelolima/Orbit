@@ -31,10 +31,9 @@ Future<Apod> searchImage(DateTime date) async {
   }
 }
 
-Future<Apod> imageCacheAPOD(DateTime searchDate) async {
+Future<Apod> cacheApod(DateTime searchDate) async {
   if (searchDate != null &&
       formatter.format(searchDate) != formatter.format(DateTime.now())) {
-    print('Mostrando foto do dia $searchDate');
     return searchImage(searchDate);
   }
 
@@ -44,27 +43,20 @@ Future<Apod> imageCacheAPOD(DateTime searchDate) async {
 
   switch (dataFoto) {
     case '':
-      print(
-          'Não há nada no banco de dados, vou retornar os dados da API e salvar no bdd a foto do dia');
       Apod apod = await searchImage(searchDate);
       if (apod != null) fotoDia.save(apod);
       return apod;
 
     default:
-      print('Encontrei algo no banco relacionado à foto do dia');
       DateTime parsedData = DateTime.parse(dataFoto);
       Duration difference = dataAtual.difference(parsedData);
       int diff = difference.inDays;
 
       if (diff >= 1) {
-        print(
-            'A diferença da foto do banco e a data atual ($dataAtual) é maior que um dia!');
         truncate(nameTablePOTD);
         fotoDia.save(await searchImage(searchDate));
         return searchImage(searchDate);
       } else {
-        print(
-            'A diferença das datas é menor que um dia! Vou servir o que está no banco :)');
         List<Apod> listApod = await fotoDia.search();
         Apod returnApod = Apod(
           copyright: listApod[0].copyright,

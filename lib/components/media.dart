@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,10 +19,11 @@ class _MediaAPIState extends State<MediaAPI> {
     switch (widget.mediaType) {
       case 'image':
         return InkWell(
-          child: Image.network(
-            widget.url,
-            fit: BoxFit.cover,
-          ),
+          child: CachedNetworkImage(
+              imageUrl: widget.url,             
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
           onTap: () {
             launch(widget.hdurl);
           },

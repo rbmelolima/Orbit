@@ -1,4 +1,6 @@
 import 'package:apod/components/favorite_button.dart';
+import 'package:apod/database/dao/favorite.dart';
+import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
 
 import 'media.dart';
@@ -74,11 +76,20 @@ class _DetailsState extends State<Details> {
                     ),
                   ),
                   Expanded(
-                    child: FavoriteButton(
-                      colorIcon: Colors.grey,
-                      statusFavorite: false,
-                      onclick: (){
-                        
+                    child: FavoriteButton( 
+                      favorited: false,
+                      onclick: () {
+                        FavoritesDao photo = FavoritesDao();
+                        Apod apod = new Apod(
+                          copyright: widget.copyright,
+                          date: widget.date,
+                          explanation: widget.explanation,
+                          hdurl: widget.hdurl,
+                          mediaType: widget.mediaType,
+                          title: widget.title,
+                          url: widget.url,
+                        );
+                        photo.favorite(apod);
                       },
                     ),
                   ),

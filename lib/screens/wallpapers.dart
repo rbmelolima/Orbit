@@ -27,9 +27,11 @@ class Wallpaper extends StatelessWidget {
           case ConnectionState.active:
             break;
           case ConnectionState.done:
-            return PhotosGrid(
-              photos: snapshot.data,
-            );
+            return Padding(
+                padding: EdgeInsets.all(12.0),
+                child: PhotosGrid(
+                  photos: snapshot.data,
+                ));
             break;
         }
 
@@ -53,7 +55,7 @@ class PhotosGrid extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 8.0,
         crossAxisSpacing: 8.0,
-        childAspectRatio: 0.8,
+        childAspectRatio: 0.6,
       ),
       itemCount: photos.length,
       itemBuilder: (context, index) {
@@ -77,9 +79,12 @@ class ImageColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Image.network(
-        photos[index].url,
-        fit: BoxFit.cover,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5.0),
+        child: Image.network(
+          photos[index].url,
+          fit: BoxFit.cover,
+        ),
       ),
       onTap: () {
         Navigator.push(
