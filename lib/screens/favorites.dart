@@ -109,6 +109,16 @@ class FavoriteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Apod apod = new Apod(
+      copyright: copyright,
+      date: date,
+      explanation: explanation,
+      hdurl: hdurl,
+      mediaType: mediaType,
+      title: title,
+      url: url,
+    );
+
     return Card(
       child: Column(
         children: <Widget>[
@@ -174,20 +184,8 @@ class FavoriteItem extends StatelessWidget {
                 ),
                 Expanded(
                   child: FavoriteButton(
-                    favorited: true,
-                    onclick: () {
-                      FavoritesDao photo = FavoritesDao();
-                      Apod apod = new Apod(
-                        copyright: copyright,
-                        date: date,
-                        explanation: explanation,
-                        hdurl: hdurl,
-                        mediaType: mediaType,
-                        title: title,
-                        url: url,
-                      );
-                      photo.favorite(apod);
-                    },
+                    apod: apod,
+                    color: Colors.red,
                   ),
                 )
               ],

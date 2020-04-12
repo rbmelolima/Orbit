@@ -2,7 +2,6 @@ import 'package:apod/components/centered_message.dart';
 import 'package:apod/components/circular_progress.dart';
 import 'package:apod/components/favorite_button.dart';
 import 'package:apod/components/media.dart';
-import 'package:apod/database/dao/favorite.dart';
 import 'package:apod/http/apod.dart';
 import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +111,11 @@ class CardApod extends StatefulWidget {
 
 class _CardApodState extends State<CardApod> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double heightText = 16.0;
     return Padding(
@@ -153,11 +157,8 @@ class _CardApodState extends State<CardApod> {
                 ),
                 Expanded(
                   child: FavoriteButton(
-                    favorited: false,
-                    onclick: () {
-                      FavoritesDao photo = FavoritesDao();
-                      photo.favorite(widget.apod);
-                    },
+                    apod: widget.apod,
+                    color: Colors.grey,
                   ),
                 ),
               ],

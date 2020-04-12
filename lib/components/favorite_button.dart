@@ -1,28 +1,37 @@
+import 'package:apod/database/dao/favorite.dart';
+import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteButton extends StatefulWidget {
-  final Function onclick;
-  final bool favorited;
+  final Apod apod;
+  final MaterialColor color;
 
-  const FavoriteButton({Key key, @required this.onclick, this.favorited})
-      : super(key: key);
+  const FavoriteButton({Key key, this.apod, this.color}) : super(key: key);
 
   @override
   _FavoriteButtonState createState() => _FavoriteButtonState();
 }
 
 class _FavoriteButtonState extends State<FavoriteButton> {
-  var color = Colors.grey;
+  MaterialColor colorFav;
+
+  @override
+  void initState() {
+    colorFav = widget.color;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.favorite),
-      color: color,
+      color: colorFav,
       onPressed: () {
-        widget.onclick();
+        FavoritesDao photo = FavoritesDao();
+        photo.favorite(widget.apod);
+
         setState(() {
-          color = Colors.red;
+          colorFav = colorFav == Colors.grey ? Colors.red : Colors.grey;
         });
       },
     );

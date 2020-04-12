@@ -1,5 +1,6 @@
 import 'package:apod/database/database.dart';
 import 'package:apod/models/apod.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'converse.dart';
 
@@ -34,12 +35,23 @@ class FavoritesDao {
     for (Map<String, dynamic> row in rows) {
       data = row[datePhoto];
     }
-    
 
     if (data == null)
       return '';
     else
       return data;
+  }
+
+  Future<MaterialColor> getColorButton(Apod apod) async {
+    String returnDate = await getDate(apod);
+
+    if(returnDate == ''){
+      return Colors.grey;
+    }
+
+    else{
+      return Colors.red;
+    }
   }
 
   Future<List<Apod>> findAll() async {
