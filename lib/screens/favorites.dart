@@ -28,7 +28,6 @@ class Favorites extends StatelessWidget {
           case ConnectionState.active:
             break;
           case ConnectionState.done:
-            print(snapshot.data);
             if (snapshot.data.isEmpty) {
               return CenteredMessage(
                 'Favorite as melhores fotos!',
@@ -185,7 +184,6 @@ class FavoriteItem extends StatelessWidget {
                 Expanded(
                   child: FavoriteButton(
                     apod: apod,
-                    color: Colors.red,
                   ),
                 )
               ],

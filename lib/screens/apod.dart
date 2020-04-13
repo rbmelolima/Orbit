@@ -158,7 +158,6 @@ class _CardApodState extends State<CardApod> {
                 Expanded(
                   child: FavoriteButton(
                     apod: widget.apod,
-                    color: Colors.grey,
                   ),
                 ),
               ],

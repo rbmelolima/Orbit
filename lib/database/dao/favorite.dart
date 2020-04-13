@@ -26,30 +26,33 @@ class FavoritesDao {
   }
 
   Future<String> getDate(Apod apod) async {
-    String sqlQuery = 'SELECT $datePhoto FROM $nameTableFavorites ';
-    String data;
+    String dateApod = apod.date;
+    List<String> dates = new List();
+
+    String sqlQuery = "SELECT $datePhoto FROM $nameTableFavorites ";
+    print(sqlQuery);
 
     final Database db = await (getDatabase());
     final List<Map<String, dynamic>> rows = await db.rawQuery(sqlQuery);
 
     for (Map<String, dynamic> row in rows) {
-      data = row[datePhoto];
+      dates.add(row[datePhoto]);
     }
 
-    if (data == null)
+    if (dates.isEmpty)
       return '';
+    else if (dates.indexOf(dateApod) != -1)
+      return dateApod;
     else
-      return data;
+      return '';
   }
 
   Future<MaterialColor> getColorButton(Apod apod) async {
     String returnDate = await getDate(apod);
 
-    if(returnDate == ''){
+    if (returnDate == '') {
       return Colors.grey;
-    }
-
-    else{
+    } else {
       return Colors.red;
     }
   }

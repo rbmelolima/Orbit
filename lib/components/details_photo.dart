@@ -87,7 +87,6 @@ class _DetailsState extends State<Details> {
                   Expanded(
                     child: FavoriteButton(
                       apod: apod,
-                      color: Colors.grey,
                     ),
                   ),
                 ],

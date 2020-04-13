@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 
 class FavoriteButton extends StatefulWidget {
   final Apod apod;
-  final MaterialColor color;
 
-  const FavoriteButton({Key key, this.apod, this.color}) : super(key: key);
+  const FavoriteButton({Key key, this.apod}) : super(key: key);
 
   @override
   _FavoriteButtonState createState() => _FavoriteButtonState();
@@ -14,26 +13,50 @@ class FavoriteButton extends StatefulWidget {
 
 class _FavoriteButtonState extends State<FavoriteButton> {
   MaterialColor colorFav;
+  FavoritesDao favoritesDao = new FavoritesDao();
 
   @override
   void initState() {
-    colorFav = widget.color;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.favorite),
-      color: colorFav,
-      onPressed: () {
-        FavoritesDao photo = FavoritesDao();
-        photo.favorite(widget.apod);
-
-        setState(() {
-          colorFav = colorFav == Colors.grey ? Colors.red : Colors.grey;
-        });
+    return FutureBuilder<MaterialColor>(
+      initialData: Colors.grey,
+      future: favoritesDao.getColorButton(widget.apod),
+      builder: (context, snapshot) {
+        colorFav = snapshot.data;
+        
+        return IconButton(
+          icon: Icon(Icons.favorite),
+          color: colorFav,
+          onPressed: () {
+            FavoritesDao photo = FavoritesDao();
+            photo.favorite(widget.apod);
+            setState(() {
+              colorFav = colorFav == Colors.grey ? Colors.red : Colors.grey;
+            });
+          },
+        );
       },
     );
   }
 }
+
+/* 
+  @override
+  void initState() {
+    colorFav = widget.color != null ? widget.color : '';
+    super.initState();
+  }
+
+IconButton(
+icon: Icon(Icons.favorite),
+color: colorFav,
+onPressed: () {
+  FavoritesDao photo = FavoritesDao();
+  photo.favorite(widget.apod)  setState(() {
+    colorFav = colorFav == Colors.grey ? Colors.red : Colors.grey;
+  });
+}, */

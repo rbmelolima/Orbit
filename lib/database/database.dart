@@ -12,7 +12,6 @@ Future<Database> getDatabase() async {
 }
 
 Future<int> truncate(String nameTable) async {
-  print('// Apagando todas as informações da tabela: $nameTable //');
   final Database db = await getDatabase();
   return db.delete(
     nameTable,

@@ -10,9 +10,11 @@ Orbit é um aplicativo mobile feito em Flutter para fornecer, todos os dias, ima
 
 4. Exibe uma grid com fotos de datas aleatórias,
 
-5. Permite favoritar fotos.
+5. Permite favoritar fotos e desfavoritar fotos.
 
 ### Próximas Features
 - [Implementar videoplayer dentro do app](https://flutter.dev/docs/cookbook/plugins/play-video).
 
-- Verificar se uma imagem já foi favoritada e mudar o estado do botão na inicialização da foto (Card, details), deixando-o vermelho ou cinza a depender se a foto já foi salva pelo usuário.
+###### Futura refatoração
+Repensar em como implementar o cache das imagens e do banco de dados de forma mais inteligente.
+

@@ -65,7 +65,12 @@ class PhotosGrid extends StatelessWidget {
             index: index,
           );
         } else
-          return null;
+          return CenteredMessage(
+            'Imagem não encontrada',
+            icon: Icons.broken_image,
+            fontSize: 16.0,
+            iconSize: 32.0,
+          );
       },
     );
   }
