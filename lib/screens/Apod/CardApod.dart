@@ -30,11 +30,14 @@ class _CardApodState extends State<CardApod> {
             url: widget.apod.url,
           ),
           Container(
-            margin: const EdgeInsets.only(bottom: 16, top: 5),
+            margin: const EdgeInsets.only(bottom: 16, top: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: <Widget>[
                 Expanded(
+                  flex: 7,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
                         margin: const EdgeInsets.only(bottom: 8.0),
@@ -50,16 +53,18 @@ class _CardApodState extends State<CardApod> {
                       ),
                       Text(
                         widget.apod.date,
-                        style: TextStyle(
-                          fontSize: 10.0,
-                        ),
+                        style: TextStyle(fontSize: 10.0, color: Colors.grey),
                       ),
                     ],
                   ),
                 ),
                 Expanded(
-                  child: FavoriteButton(
-                    apod: widget.apod,
+                  flex: 3,
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: FavoriteButton(
+                      apod: widget.apod,
+                    ),
                   ),
                 ),
               ],

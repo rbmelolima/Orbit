@@ -30,7 +30,6 @@ class FavoritesDao {
     List<String> dates = new List();
 
     String sqlQuery = "SELECT $datePhoto FROM $nameTableFavorites ";
-    print(sqlQuery);
 
     final Database db = await (getDatabase());
     final List<Map<String, dynamic>> rows = await db.rawQuery(sqlQuery);
