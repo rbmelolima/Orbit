@@ -13,7 +13,7 @@ class Wallpaper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return CenteredMessage(
-            'Erro: ' + snapshot.error.toString(),
+            'Houve um erro inesperado, tente novamente em um outro momento',
             icon: Icons.error_outline,
           );
         }

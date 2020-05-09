@@ -26,7 +26,8 @@ Future<Apod> searchImage(DateTime date) async {
       return Apod.fromJson(json.decode(response.body));
 
     default:
-      throw Exception('Falha ao buscar na API!');
+      throw Exception('Informe isso ao desenvolvedor - HTTP Status ' +
+          response.statusCode.toString());
       break;
   }
 }

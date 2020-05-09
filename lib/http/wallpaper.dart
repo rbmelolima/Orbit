@@ -16,10 +16,15 @@ Future<List<Apod>> searchWallpaper() async {
     'https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=20',
   );
 
-  if (response.statusCode == 200) {
-    return compute(parseApod, response.body);
-  } else
-    throw Exception('Falha ao buscar na API!' + response.statusCode.toString());
+  switch (response.statusCode) {
+    case 200:
+      return compute(parseApod, response.body);
+
+    default:
+      throw Exception('Informe isso ao desenvolvedor - HTTP Status ' +
+          response.statusCode.toString());
+      break;
+  }
 }
 
 List<Apod> parseApod(String responseBody) {
