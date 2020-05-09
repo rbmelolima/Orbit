@@ -1,7 +1,7 @@
-import 'package:apod/screens/apod.dart';
-import 'package:apod/screens/favorites.dart';
-import 'package:apod/screens/wallpapers.dart';
 import 'package:flutter/material.dart';
+import 'screens/Apod/Apod.dart';
+import 'screens/Favorites/Favorites.dart';
+import 'screens/Wallpapers/Wallpapers.dart';
 
 void main() {
   runApp(
@@ -17,35 +17,41 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
-  final List<Widget> _children = [Wallpaper(), Favorites(), APOD()];
+  final List<Widget> _children = [
+    APOD(),
+    Favorites(),
+    Wallpaper(),
+  ];
 
   @override
-  Widget build(BuildContext context) {   
-
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Orbit - Wallpapers',
       theme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Orbit - Universe wallpapers'),
+          title: Text('Orbit - Universe Wallpapers'),
+          centerTitle: true,
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.white,
           onTap: onTabTapped,
-          type: BottomNavigationBarType.shifting,
+          type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.collections),
-              title: Text('Papéis de parede'),
+              icon: Icon(Icons.camera),
+              title: Text('Foto do dia'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               title: Text('Favoritos'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.camera),
-              title: Text('Foto do dia'),
+              icon: Icon(Icons.collections),
+              title: Text('Papéis de parede'),
             ),
           ],
         ),

@@ -1,4 +1,4 @@
-import 'package:apod/components/favorite_button.dart';
+import 'package:apod/components/FavoriteButton.dart';
 import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
 

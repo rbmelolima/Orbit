@@ -1,90 +1,9 @@
-import 'package:apod/components/centered_message.dart';
-import 'package:apod/components/circular_progress.dart';
-import 'package:apod/components/details_photo.dart';
-import 'package:apod/components/favorite_button.dart';
-import 'package:apod/database/dao/favorite.dart';
+
+import 'package:apod/components/DetailsPhoto.dart';
+import 'package:apod/components/FavoriteButton.dart';
 import 'package:apod/models/apod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-class Favorites extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    FavoritesDao favorite = FavoritesDao();
-
-    return FutureBuilder<List<Apod>>(
-      future: favorite.findAll(),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return CenteredMessage(
-              'Nada foi encontrado!',
-              icon: Icons.error_outline,
-            );
-            break;
-          case ConnectionState.waiting:
-            return CircularProgress();
-            break;
-          case ConnectionState.active:
-            break;
-          case ConnectionState.done:
-            if (snapshot.data.isEmpty) {
-              return CenteredMessage(
-                'Favorite as melhores fotos!',
-                icon: Icons.favorite_border,
-              );
-            } else {
-              return FavoritesGrid(favoritesPhotos: snapshot.data);
-            }
-            break;
-        }
-
-        if (snapshot.hasError) {
-          return CenteredMessage(
-            'Erro ao carregar os favoritos!',
-            icon: Icons.error_outline,
-          );
-        }
-
-        return CenteredMessage(
-          'Nada foi encontrado!',
-          icon: Icons.error_outline,
-        );
-      },
-    );
-  }
-}
-
-class FavoritesGrid extends StatelessWidget {
-  final List<Apod> favoritesPhotos;
-
-  const FavoritesGrid({Key key, this.favoritesPhotos}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: favoritesPhotos.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: FavoriteItem(
-                copyright: favoritesPhotos[index].copyright,
-                date: favoritesPhotos[index].date,
-                explanation: favoritesPhotos[index].explanation,
-                hdurl: favoritesPhotos[index].hdurl,
-                mediaType: favoritesPhotos[index].mediaType,
-                title: favoritesPhotos[index].title,
-                url: favoritesPhotos[index].url,
-              ),
-            )
-          ],
-        );
-      },
-    );
-  }
-}
 
 class FavoriteItem extends StatelessWidget {
   final String copyright;
@@ -119,6 +38,7 @@ class FavoriteItem extends StatelessWidget {
     );
 
     return Card(
+      elevation: 3,
       child: Column(
         children: <Widget>[
           InkWell(
