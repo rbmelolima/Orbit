@@ -1,3 +1,4 @@
+import 'package:apod/Style/Colors.dart';
 import 'package:apod/components/CenteredMessage.dart';
 import 'package:apod/components/CircularProgress.dart';
 import 'package:apod/http/apod.dart';
@@ -26,8 +27,8 @@ class _POTDState extends State<APOD> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.calendar_today),
-        backgroundColor: Colors.white,
+        child: Icon(Icons.calendar_today, color: Colors.white),
+        backgroundColor: purple,
         onPressed: () {
           showDatePicker(
             context: context,
@@ -46,9 +47,12 @@ class _POTDState extends State<APOD> {
         future: apod,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return CenteredMessage(
-              'Houve um erro inesperado, tente novamente em um outro momento',
-              icon: Icons.error_outline,
+            return Padding(
+              child: CenteredMessage(
+                'Houve um erro inesperado, tente novamente em um outro momento',
+                icon: Icons.error_outline,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
             );
           }
 

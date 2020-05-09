@@ -12,9 +12,12 @@ class Wallpaper extends StatelessWidget {
       future: searchWallpaper(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return CenteredMessage(
-            'Houve um erro inesperado, tente novamente em um outro momento',
-            icon: Icons.error_outline,
+          return Padding(
+            child: CenteredMessage(
+              'Houve um erro inesperado, tente novamente em um outro momento',
+              icon: Icons.error_outline,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
           );
         }
 

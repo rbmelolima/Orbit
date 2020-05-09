@@ -1,3 +1,4 @@
+import 'package:apod/Style/Colors.dart';
 import 'package:flutter/material.dart';
 
 class CenteredMessage extends StatelessWidget {
@@ -24,6 +25,7 @@ class CenteredMessage extends StatelessWidget {
             child: Icon(
               icon,
               size: iconSize,
+              color: softPurple,
             ),
             visible: icon != null,
           ),

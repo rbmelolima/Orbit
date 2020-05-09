@@ -1,5 +1,5 @@
-import 'package:apod/components/DetailsPhoto.dart';
 import 'package:apod/models/apod.dart';
+import 'package:apod/screens/Apod/CardApod.dart';
 import 'package:flutter/material.dart';
 
 class PhotoItem extends StatelessWidget {
@@ -25,27 +25,22 @@ class PhotoItem extends StatelessWidget {
 
   Future _pushDetailsPhotoScreen(BuildContext context) {
     return Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) {
-          return MaterialApp(
-            title: 'Orbit - Wallpapers',
-            theme: ThemeData.dark(),
-            home: Scaffold(
-              appBar: AppBar(
-                title: Text('Detalhes da foto'),
-              ),
-              body: Details(
-                copyright: photos[index].copyright,
-                explanation: photos[index].explanation,
-                hdurl: photos[index].hdurl,
-                mediaType: photos[index].mediaType,
-                title: photos[index].title,
-                url: photos[index].url,
-                date: photos[index].date,
-              ),
-            ),
-          );
-        }),
-      );
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Detalhes da foto'),
+            centerTitle: true,
+          ),
+          body: ListView(
+            children: <Widget>[
+              CardApod(
+                apod: photos[index],
+              )
+            ],
+          ),
+        );
+      }),
+    );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MediaAPI extends StatefulWidget {
   final String mediaType;
@@ -18,26 +17,16 @@ class _MediaAPIState extends State<MediaAPI> {
   Widget build(BuildContext context) {
     switch (widget.mediaType) {
       case 'image':
-        return InkWell(
-          child: CachedNetworkImage(
-              imageUrl: widget.url,             
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-          onTap: () {
-            launch(widget.hdurl);
-          },
-        );
+        return CachedNetworkImage(
+            imageUrl: widget.url,             
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          );
 
       case 'video':
-        return InkWell(
-          child: Image.asset(
-            'images/redirect.jpg',
-            fit: BoxFit.cover,
-          ),
-          onTap: () {
-            launch(widget.url);
-          },
+        return Image.asset(
+          'images/redirect.jpg',
+          fit: BoxFit.cover,
         );
 
       default:

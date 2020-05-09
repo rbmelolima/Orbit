@@ -1,3 +1,4 @@
+import 'package:apod/Style/Colors.dart';
 import 'package:flutter/material.dart';
 
 class CircularProgress extends StatelessWidget {
@@ -12,7 +13,9 @@ class CircularProgress extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          CircularProgressIndicator(),
+          CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(purple),
+          ),
         ],
       ),
     );

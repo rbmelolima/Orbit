@@ -1,18 +1,12 @@
 import 'dart:convert';
 import 'package:apod/database/dao/apod.dart';
 import 'package:apod/database/database.dart';
-import 'package:http/http.dart';
-import 'package:http_interceptor/http_interceptor.dart';
+import 'package:apod/http/key.dart';
 import 'package:apod/models/apod.dart';
 import 'package:intl/intl.dart';
 import 'Interceptor/interceptor.dart';
 
-const String apiKey = 'tDUbr3ihJdiU5aLiKcvfAtur9f47eE4ztArwZFOH';
 var formatter = new DateFormat('yyyy-MM-dd');
-
-Client client = HttpClientWithInterceptor.build(
-  interceptors: [LogginInterceptor()],
-);
 
 Future<Apod> searchImage(DateTime date) async {
   String formattedDate =

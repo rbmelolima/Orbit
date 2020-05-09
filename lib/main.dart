@@ -1,3 +1,4 @@
+import 'package:apod/Style/Colors.dart';
 import 'package:flutter/material.dart';
 import 'screens/Apod/Apod.dart';
 import 'screens/Favorites/Favorites.dart';
@@ -37,7 +38,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.white,
+          selectedItemColor: softPurple,
           onTap: onTabTapped,
           type: BottomNavigationBarType.fixed,
           items: [

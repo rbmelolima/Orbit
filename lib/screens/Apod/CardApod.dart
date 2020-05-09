@@ -2,6 +2,7 @@ import 'package:apod/components/FavoriteButton.dart';
 import 'package:apod/components/media.dart';
 import 'package:apod/models/apod.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CardApod extends StatefulWidget {
   final Apod apod;
@@ -31,7 +32,7 @@ class _CardApodState extends State<CardApod> {
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 16, top: 8),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.only(left: 8),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -60,11 +61,24 @@ class _CardApodState extends State<CardApod> {
                 ),
                 Expanded(
                   flex: 3,
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    child: FavoriteButton(
-                      apod: widget.apod,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.hd,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                        onPressed: () {
+                          launch(widget.apod.url);
+                        },
+                      ),
+                      Container(width: 8),
+                      FavoriteButton(
+                        apod: widget.apod,
+                      ),
+                    ],
                   ),
                 ),
               ],

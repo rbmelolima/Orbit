@@ -1,9 +1,10 @@
-
-import 'package:apod/components/DetailsPhoto.dart';
+import 'package:apod/Style/Colors.dart';
 import 'package:apod/components/FavoriteButton.dart';
 import 'package:apod/models/apod.dart';
+import 'package:apod/screens/Apod/CardApod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FavoriteItem extends StatelessWidget {
   final String copyright;
@@ -38,7 +39,7 @@ class FavoriteItem extends StatelessWidget {
     );
 
     return Card(
-      elevation: 3,
+      elevation: 10,
       child: Column(
         children: <Widget>[
           InkWell(
@@ -51,22 +52,15 @@ class FavoriteItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return MaterialApp(
-                    title: 'Orbit - Wallpapers',
-                    theme: ThemeData.dark(),
-                    home: Scaffold(
-                      appBar: AppBar(
-                        title: Text('Detalhes da foto'),
-                      ),
-                      body: Details(
-                        copyright: copyright,
-                        explanation: explanation,
-                        hdurl: hdurl,
-                        mediaType: mediaType,
-                        title: title,
-                        url: url,
-                        date: date,
-                      ),
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text('Detalhes da foto'),
+                      centerTitle: true,
+                    ),
+                    body: ListView(
+                      children: <Widget>[
+                        CardApod(apod: apod,)
+                      ],
                     ),
                   );
                 }),
@@ -78,17 +72,18 @@ class FavoriteItem extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
+                  flex: 7,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(bottom: 5.0),
+                        margin: EdgeInsets.only(bottom: 8.0),
                         child: Text(
                           title,
                           style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: softPurple),
                         ),
                       ),
                       Text(
@@ -102,10 +97,27 @@ class FavoriteItem extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: FavoriteButton(
-                    apod: apod,
+                  flex: 3,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.hd,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                        onPressed: () {
+                          launch(apod.url);
+                        },
+                      ),
+                      Container(width: 8),
+                      FavoriteButton(
+                        apod: apod,
+                      ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),

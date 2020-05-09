@@ -1,3 +1,4 @@
+import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
 class LogginInterceptor implements InterceptorContract {
@@ -19,3 +20,8 @@ class LogginInterceptor implements InterceptorContract {
     return data;
   }
 }
+
+
+Client client = HttpClientWithInterceptor.build(
+  interceptors: [LogginInterceptor()],
+);
