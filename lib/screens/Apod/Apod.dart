@@ -47,7 +47,7 @@ class _POTDState extends State<APOD> {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return CenteredMessage(
-              'Erro: ' + snapshot.hasData.toString(),
+              'Erro: ' + snapshot.error.toString(),
               icon: Icons.error_outline,
             );
           }

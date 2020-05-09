@@ -15,6 +15,9 @@ Orbit é um aplicativo mobile feito em Flutter para fornecer, todos os dias, ima
 ### Próximas Features
 - [Implementar videoplayer dentro do app](https://flutter.dev/docs/cookbook/plugins/play-video).
 
+### Bugfix
+Ao gerar um apk, há um erro: "SocketException: Failed host lookup: 'api.nasa.gov' (OS Error: No address associated with hostname, errno = 7)"
+
 ###### Futura refatoração
 Repensar em como implementar o cache das imagens e do banco de dados de forma mais inteligente.
 

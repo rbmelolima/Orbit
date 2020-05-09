@@ -1,4 +1,3 @@
-
 import 'package:apod/components/CenteredMessage.dart';
 import 'package:apod/components/CircularProgress.dart';
 import 'package:apod/http/wallpaper.dart';
@@ -14,7 +13,7 @@ class Wallpaper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return CenteredMessage(
-            'Erro!',
+            'Erro: ' + snapshot.error.toString(),
             icon: Icons.error_outline,
           );
         }
@@ -44,5 +43,3 @@ class Wallpaper extends StatelessWidget {
     );
   }
 }
-
-
